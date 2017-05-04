@@ -34,9 +34,8 @@
 #include"PnPsolver.h"
 
 #include<iostream>
-
+#include<time.h>
 #include<mutex>
-
 
 using namespace std;
 
@@ -266,9 +265,13 @@ cv::Mat Tracking::GrabImageMonocular(const cv::Mat &im, const double &timestamp)
 
 void Tracking::Track()
 {
+    int64 start = cvGetTickCount();
+    
+    printf("\n ---- Track Start ---- \n");
     if(mState==NO_IMAGES_YET)
     {
         mState = NOT_INITIALIZED;
+        printf("mState = NOT_INITIALIZED\n");
     }
 
     mLastProcessedState=mState;
@@ -502,12 +505,15 @@ void Tracking::Track()
         mlFrameTimes.push_back(mlFrameTimes.back());
         mlbLost.push_back(mState==LOST);
     }
-
+    int64 end = cvGetTickCount();
+    double cost = (end-start)/cvGetTickFrequency();
+    printf("\n ---- Track End ---- time cost = %f\n", cost);
 }
 
 
 void Tracking::StereoInitialization()
 {
+    printf("StereoInitialization\n");
     if(mCurrentFrame.N>500)
     {
         // Set Frame pose to the origin
@@ -562,7 +568,7 @@ void Tracking::StereoInitialization()
 
 void Tracking::MonocularInitialization()
 {
-
+    printf("MonocularInitialization\n");
     if(!mpInitializer)
     {
         // Set Reference Frame
@@ -756,6 +762,7 @@ void Tracking::CheckReplacedInLastFrame()
 
 bool Tracking::TrackReferenceKeyFrame()
 {
+    printf("TrackReferenceKeyFrame\n");
     // Compute Bag of Words vector
     mCurrentFrame.ComputeBoW();
 
@@ -866,6 +873,8 @@ void Tracking::UpdateLastFrame()
 
 bool Tracking::TrackWithMotionModel()
 {
+    double start = cvGetTickCount();
+    printf("TrackWithMotionModel");
     ORBmatcher matcher(0.9,true);
 
     // Update last frame pose according to its reference keyframe
@@ -923,12 +932,15 @@ bool Tracking::TrackWithMotionModel()
         mbVO = nmatchesMap<10;
         return nmatches>20;
     }
-
+    double end = cvGetTickCount();
+    printf(" cost %f ms\n", (end-start)/(cvGetTickFrequency()*1000));
     return nmatchesMap>=10;
 }
 
 bool Tracking::TrackLocalMap()
 {
+    double start = cvGetTickCount();
+    printf("TrackLocalMap");
     // We have an estimation of the camera pose and some map points tracked in the frame.
     // We retrieve the local map and try to find matches to points in the local map.
 
@@ -961,7 +973,8 @@ bool Tracking::TrackLocalMap()
 
         }
     }
-
+    double end = cvGetTickCount();
+    printf(" cost %f ms\n", (end-start)/(cvGetTickFrequency()*1000));
     // Decide if the tracking was succesful
     // More restrictive if there was a relocalization recently
     if(mCurrentFrame.mnId<mnLastRelocFrameId+mMaxFrames && mnMatchesInliers<50)
@@ -1340,6 +1353,7 @@ void Tracking::UpdateLocalKeyFrames()
 
 bool Tracking::Relocalization()
 {
+    printf("Relocalization\n");
     // Compute Bag of Words Vector
     mCurrentFrame.ComputeBoW();
 

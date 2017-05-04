@@ -780,7 +780,7 @@
 				TargetAttributes = {
 					60FF20331DC883E7003B783E = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = S4264FZ974;
+						DevelopmentTeam = 65XGEUP4SR;
 						ProvisioningStyle = Automatic;
 					};
 					60FF204C1DC883E7003B783E = {
@@ -1064,7 +1064,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LIBRARY = "libc++";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = S4264FZ974;
+				DEVELOPMENT_TEAM = 65XGEUP4SR;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1085,7 +1085,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = ygx111.orbslamios;
+				PRODUCT_BUNDLE_IDENTIFIER = dyb.orbslamios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
@@ -1098,7 +1098,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LIBRARY = "libc++";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = S4264FZ974;
+				DEVELOPMENT_TEAM = 65XGEUP4SR;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1119,7 +1119,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = ygx111.orbslamios;
+				PRODUCT_BUNDLE_IDENTIFIER = dyb.orbslamios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
