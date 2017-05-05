@@ -20,6 +20,11 @@
 
 #include <unistd.h>
 
+
+#import "DYBOpenGLView.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AssetsLibrary/ALAssetsLibrary.h>
+
 using namespace cv;
 using namespace std;
 
@@ -28,36 +33,86 @@ const char *settings = [[[NSBundle mainBundle]pathForResource:@"Settings" ofType
 
 ORB_SLAM2::System SLAM(ORBvoc,settings,ORB_SLAM2::System::MONOCULAR,false);
 
-@interface ViewController ()
-{
-    CvVideoCamera* videoCamera;
-}
+@interface ViewController () <AVCaptureVideoDataOutputSampleBufferDelegate>
+
+@property (nonatomic , strong) AVCaptureSession *mCaptureSession; //负责输入和输出设备之间的数据传递
+@property (nonatomic , strong) AVCaptureDeviceInput *mCaptureDeviceInput;//负责从AVCaptureDevice获得输入数据
+@property (nonatomic , strong) AVCaptureVideoDataOutput *mCaptureDeviceOutput; //
+@property (nonatomic , strong) DYBOpenGLView *mGLView;
 
 @end
 
 @implementation ViewController
-
-@synthesize videoCamera = _videoCamera;
+{
+    dispatch_queue_t mProcessQueue;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.mGLView = (DYBOpenGLView *)self.view;
+    [self.mGLView setupGL];
     
-    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    self.imageView.image = [UIImage imageNamed:@"icon.jpg"];
+    self.mCaptureSession = [[AVCaptureSession alloc] init];
+    self.mCaptureSession.sessionPreset = AVCaptureSessionPreset640x480;
     
-    self.videoCamera = [[CvVideoCamera alloc] initWithParentView:self.imageView];
-    self.videoCamera.delegate = self;
-    self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionBack;
-    self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset640x480;
-    self.videoCamera.defaultFPS = 30;
-    self.videoCamera.grayscaleMode = NO;
+    mProcessQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+    
+    AVCaptureDevice *inputCamera = nil;
+    NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+    for (AVCaptureDevice *device in devices)
+    {
+        if ([device position] == AVCaptureDevicePositionBack)
+        {
+            inputCamera = device;
+        }
+    }
+    
+    self.mCaptureDeviceInput = [[AVCaptureDeviceInput alloc] initWithDevice:inputCamera error:nil];
+    
+    if ([self.mCaptureSession canAddInput:self.mCaptureDeviceInput]) {
+        [self.mCaptureSession addInput:self.mCaptureDeviceInput];
+    }
+    
+    
+    self.mCaptureDeviceOutput = [[AVCaptureVideoDataOutput alloc] init];
+    [self.mCaptureDeviceOutput setAlwaysDiscardsLateVideoFrames:NO];
+    
+    self.mGLView.isFullYUVRange = YES;
+    [self.mCaptureDeviceOutput setVideoSettings:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:kCVPixelFormatType_420YpCbCr8BiPlanarFullRange] forKey:(id)kCVPixelBufferPixelFormatTypeKey]];
+    [self.mCaptureDeviceOutput setSampleBufferDelegate:self queue:mProcessQueue];
+    if ([self.mCaptureSession canAddOutput:self.mCaptureDeviceOutput]) {
+        [self.mCaptureSession addOutput:self.mCaptureDeviceOutput];
+    }
+    
+    AVCaptureConnection *connection = [self.mCaptureDeviceOutput connectionWithMediaType:AVMediaTypeVideo];
+    [connection setVideoOrientation:AVCaptureVideoOrientationPortraitUpsideDown];
+    
+    
+    [self.mCaptureSession startRunning];
+
 }
 
-- (IBAction)startButtonPressed:(id)sender
-{
-    [self.videoCamera start];
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
+    static long frameID = 0;
+    ++frameID;
+    CVPixelBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+    // pixelBuffer to cvMat
+    OSType format = CVPixelBufferGetPixelFormatType(pixelBuffer);
+    NSAssert(format == kCVPixelFormatType_420YpCbCr8BiPlanarFullRange, @"Only YUV is supported");
+    CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+    void *baseaddress = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
+    
+    CGFloat width = CVPixelBufferGetWidth(pixelBuffer);
+    CGFloat height = CVPixelBufferGetHeight(pixelBuffer);
+    
+    cv::Mat mat(height, width, CV_8UC1, baseaddress, 0);
+    [self processImage:mat];
+    // cvMat to pixelBuffer
+    
+    [self.mGLView displayPixelBuffer:pixelBuffer];
 }
+
 
 - (void)processImage:(cv::Mat &)image
 {
@@ -82,7 +137,7 @@ ORB_SLAM2::System SLAM(ORBvoc,settings,ORB_SLAM2::System::MONOCULAR,false);
             cv::projectPoints(allmappoints, rVec, tVec, SLAM.mpTracker->mK, SLAM.mpTracker->mDistCoef, projectedPoints);
             for (size_t j = 0; j < projectedPoints.size(); ++j) {
                 cv::Point2f r1 = projectedPoints[j];
-                cv::circle(image, cv::Point(r1.x, r1.y), 2, cv::Scalar(0, 255, 0, 255), 1, 8);
+                cv::circle(image, cv::Point(r1.x, r1.y), 2, cv::Scalar(255, 255, 255, 255), 1, 8);
             }
         }
         

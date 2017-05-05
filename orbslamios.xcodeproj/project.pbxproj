@@ -72,7 +72,6 @@
 		60FF20391DC883E7003B783E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FF20381DC883E7003B783E /* main.m */; };
 		60FF203C1DC883E7003B783E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FF203B1DC883E7003B783E /* AppDelegate.m */; };
 		60FF203F1DC883E7003B783E /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 60FF203E1DC883E7003B783E /* ViewController.mm */; };
-		60FF20421DC883E7003B783E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60FF20401DC883E7003B783E /* Main.storyboard */; };
 		60FF20441DC883E7003B783E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60FF20431DC883E7003B783E /* Assets.xcassets */; };
 		60FF20471DC883E7003B783E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60FF20451DC883E7003B783E /* LaunchScreen.storyboard */; };
 		60FF20521DC883E7003B783E /* orbslamiosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FF20511DC883E7003B783E /* orbslamiosTests.m */; };
@@ -99,6 +98,10 @@
 		60FF21E31DC88CDE003B783E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60FF21E21DC88CDE003B783E /* Foundation.framework */; };
 		60FF21E51DC88CFF003B783E /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60FF21E41DC88CFF003B783E /* AssetsLibrary.framework */; };
 		60FF21E71DC890F1003B783E /* icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 60FF21E61DC890F1003B783E /* icon.jpg */; };
+		AFF88E091EBC65F400DFE907 /* DYBOpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF88E081EBC65F400DFE907 /* DYBOpenGLView.m */; };
+		AFF88E0C1EBC69C800DFE907 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = AFF88E0A1EBC69C800DFE907 /* Shader.fsh */; };
+		AFF88E0D1EBC69C800DFE907 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = AFF88E0B1EBC69C800DFE907 /* Shader.vsh */; };
+		AFF88E101EBC6A0B00DFE907 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFF88E0E1EBC6A0B00DFE907 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -277,7 +280,6 @@
 		60FF203B1DC883E7003B783E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		60FF203D1DC883E7003B783E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		60FF203E1DC883E7003B783E /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
-		60FF20411DC883E7003B783E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		60FF20431DC883E7003B783E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		60FF20461DC883E7003B783E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		60FF20481DC883E7003B783E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -309,6 +311,11 @@
 		60FF21E21DC88CDE003B783E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		60FF21E41DC88CFF003B783E /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		60FF21E61DC890F1003B783E /* icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon.jpg; sourceTree = "<group>"; };
+		AFF88E071EBC65F400DFE907 /* DYBOpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYBOpenGLView.h; sourceTree = "<group>"; };
+		AFF88E081EBC65F400DFE907 /* DYBOpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYBOpenGLView.m; sourceTree = "<group>"; };
+		AFF88E0A1EBC69C800DFE907 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
+		AFF88E0B1EBC69C800DFE907 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
+		AFF88E0F1EBC6A0B00DFE907 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -644,6 +651,7 @@
 		60FF20361DC883E7003B783E /* orbslamios */ = {
 			isa = PBXGroup;
 			children = (
+				AFF88E0E1EBC6A0B00DFE907 /* Main.storyboard */,
 				60E15E581E306C87002E4C9E /* ORB_SLAM */,
 				60FF21E61DC890F1003B783E /* icon.jpg */,
 				60FF21BB1DC8846A003B783E /* opencv2.framework */,
@@ -651,7 +659,8 @@
 				60FF203B1DC883E7003B783E /* AppDelegate.m */,
 				60FF203D1DC883E7003B783E /* ViewController.h */,
 				60FF203E1DC883E7003B783E /* ViewController.mm */,
-				60FF20401DC883E7003B783E /* Main.storyboard */,
+				AFF88E071EBC65F400DFE907 /* DYBOpenGLView.h */,
+				AFF88E081EBC65F400DFE907 /* DYBOpenGLView.m */,
 				60FF20431DC883E7003B783E /* Assets.xcassets */,
 				60FF20451DC883E7003B783E /* LaunchScreen.storyboard */,
 				60FF20481DC883E7003B783E /* Info.plist */,
@@ -663,6 +672,8 @@
 		60FF20371DC883E7003B783E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AFF88E0A1EBC69C800DFE907 /* Shader.fsh */,
+				AFF88E0B1EBC69C800DFE907 /* Shader.vsh */,
 				60FF20381DC883E7003B783E /* main.m */,
 			);
 			name = "Supporting Files";
@@ -821,13 +832,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				60FF20471DC883E7003B783E /* LaunchScreen.storyboard in Resources */,
+				AFF88E0C1EBC69C800DFE907 /* Shader.fsh in Resources */,
 				60FF21E71DC890F1003B783E /* icon.jpg in Resources */,
+				AFF88E101EBC6A0B00DFE907 /* Main.storyboard in Resources */,
 				60E15F1D1E306C87002E4C9E /* LICENSE.txt in Resources */,
 				60E15FCE1E30A8DA002E4C9E /* Settings.yaml in Resources */,
 				60FF20441DC883E7003B783E /* Assets.xcassets in Resources */,
 				60E15F1B1E306C87002E4C9E /* LICENSE.txt in Resources */,
 				60E15F171E306C87002E4C9E /* CMakeLists.txt in Resources */,
-				60FF20421DC883E7003B783E /* Main.storyboard in Resources */,
+				AFF88E0D1EBC69C800DFE907 /* Shader.vsh in Resources */,
 				60E15F201E306C87002E4C9E /* LICENSE.txt in Resources */,
 				603ECF751DCB162B00CFED37 /* ORBvoc.bin in Resources */,
 			);
@@ -871,6 +884,7 @@
 				60E15F181E306C87002E4C9E /* BowVector.cpp in Sources */,
 				60E15F141E306C87002E4C9E /* System.cc in Sources */,
 				60E15F161E306C87002E4C9E /* Viewer.cc in Sources */,
+				AFF88E091EBC65F400DFE907 /* DYBOpenGLView.m in Sources */,
 				60E15F0C1E306C87002E4C9E /* Map.cc in Sources */,
 				60E15F151E306C87002E4C9E /* Tracking.cc in Sources */,
 				60E15FBC1E306F32002E4C9E /* optimization_algorithm_with_hessian.cpp in Sources */,
@@ -948,20 +962,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		60FF20401DC883E7003B783E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				60FF20411DC883E7003B783E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		60FF20451DC883E7003B783E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				60FF20461DC883E7003B783E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		AFF88E0E1EBC6A0B00DFE907 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AFF88E0F1EBC6A0B00DFE907 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
